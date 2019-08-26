@@ -1,0 +1,189 @@
+<!--
+    Copyright (c) 2004-2019 Antonio Bueno  https://www.antoniobs.net
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello HTML5</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            let x = document.querySelector('li'); // first item
+            let y = document.querySelectorAll('li:first-child'); // first item
+            y = document.querySelectorAll('li'); // always return an node array
+
+            var forEach = Array.prototype.forEach;
+
+            // Method 1 - Iteration
+            forEach.call(y, function (item) {
+                console.log(item.innerText);
+            });
+
+            // Method 2 - Iteration
+            y.forEach(i => { console.log('here -> ' + i.innerText); })
+
+            // Dynamic element
+            let list = document.querySelector('.unordered-list')
+            let items = document.getElementsByClassName('li-item'); // Dynamic count only using getElementsByClassName
+            console.log(items.length);// Dynamic count
+            let newItem = document.createElement('li');
+            newItem.innerText = 'New Dynamic Item :-)';
+            newItem.className = 'li-item';
+            list.appendChild(newItem);
+            console.log(items.length);// Dynamic count
+
+            var label = document.getElementById('range-label');
+            document.getElementById('range').addEventListener('change', function () {
+                label.innerText = this.value;
+            }, false);
+
+        }
+    </script>
+    <style>
+        input:required {
+            border-left: 4px solid #c33;
+        }
+
+        input:focus:invalid,
+        textarea:focus:invalid,
+        select:focus:invalid {
+            color: #c33;
+            border-color: #c33;
+        }
+
+        /* input:focus:invalid:focus,
+        textarea:focus:invalid:focus,
+        select:focus:invalid:focus {
+            border-color: #c33;
+            -webkit-box-shadow: 0 0 6px #fcc;
+            -moz-box-shadow: 0 0 6px #fcc;
+
+                box-shadow: 0 0 6px #fcc;
+        } */
+
+        input:valid+.invalid {
+            /* Adjacent sibling selector */
+            visibility: hidden;
+        }
+
+
+
+        input:invalid+.invalid {
+            visibility: visible;
+        }
+
+        input:required {
+            border-bottom: 2px solid #c33;
+        }
+
+        input:valid {
+            border-bottom: transparent;
+        }
+
+        .invalid {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul class="unordered-list">
+        <li class="li-item">:-)</li>
+        <li class="li-item">:-O</li>
+        <li class="li-item">:-p</li>
+    </ul>
+
+    <hr>
+
+    <form>
+        <p>
+            Search: <input type="search" autofocus>
+        </p>
+        <input type="submit">
+    </form>
+
+    <hr>
+
+    <form>
+
+        <div>
+            Username:
+            <input type="text" id="username" pattern="[a-zA-Z ]{5,}" placeholder="Username" required maxlength="30" />
+            <div class="invalid">Elige un usuario, solo se permiten caracteres alfabeticos sin numeros</div>
+        </div>
+
+
+        <div>
+
+            Name + First name:
+            <input type="text" required id="text-name" pattern="(.*)\s(.*)" placeholder="Name and last name" />
+
+            <div class="invalid">No mijo hace falta tu "nombre Apellido" porfa!</div>
+        </div>
+        <p>
+            Color: <input id="color" type="color" value="#ff8000">
+        </p>
+
+        <p>
+            Datalist:
+            <input list="color-list" />
+            <datalist id="color-list">
+                <option value="Blue">
+                <option value="Red">
+                <option value="Green">
+                <option value="Orange">
+            </datalist>
+        </p>
+
+
+        <p>
+            datetime: <input type="datetime-local" />
+        </p>
+        <p>
+            email <input type="email" required placeholder="email" />
+        </p>
+        <div>
+            url: <input type="url" required placeholder="url" />
+            <div class="invalid"> Pon una pagian de internet porejemplo: https://antoniobs.net</div>
+            <!-- <div class="validation-messages">
+                <span data-rule="valueMissing" class="hide"> Este dato se requiere aguebo! </span>
+                <span data-rule="patternMismatch" class="hide"> Se reuiere una URL mijo!  </span>
+                <span data-rule="typeMismatch" class="hide"> Uy no es valido, se requiere un mail valido </span>
+
+            </div> -->
+        </div>
+        <p>
+            tel: <input type="tel" required placeholder="tel" />
+        </p>
+        <p>
+            month: <input type="month" value="2019-08" />
+        </p>
+        <p>
+            number: <input type="number" required placeholder="0" min="1" max="5" />
+        </p>
+
+        <p>
+            range: <input id="range" type="range" min="0" max="100" step="10" value="0" />
+            <span id="range-label"></span>
+        </p>
+        <p>
+            week: <input id="week" type="week" value="2019-W34" />
+        </p>
+
+        <p>
+            time: <input type="time" />
+        </p>
+        <p>
+            search: <input type="search" required />
+        </p>
+        <input type="submit">
+    </form>
+</body>
+
+</html>
